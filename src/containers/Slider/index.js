@@ -7,14 +7,14 @@ import "./style.scss";
 const Slider = () => {
   const { data } = useData();
   const [index, setIndex] = useState(0);
-  // 
-  const byDateDesc = data.focus.sort((evtA, evtB) =>
+  // Modification 
+  const byDateDesc = data?.focus.sort((evtA, evtB) =>
   new Date(evtB.date) - new Date(evtA.date)
 );
-
+// ajout de -1
   const nextCard = () => {
     setTimeout(
-      () => setIndex(index < byDateDesc.length -1 ? index + 1 : 0),
+      () => setIndex(index < byDateDesc.length ? index + 1 : 0),
       5000
     );
   };
