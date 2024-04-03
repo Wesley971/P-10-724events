@@ -14,6 +14,8 @@ import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
   const {last} = useData()
+  // eslint-disable-next-line no-console
+  console.log("Contenu de last :", last);
   return <>
     <header>
       <Menu />
