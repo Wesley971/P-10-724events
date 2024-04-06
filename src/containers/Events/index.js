@@ -13,12 +13,20 @@ const EventList = () => {
   const { data, error } = useData();
   const [type, setType] = useState();
   const [currentPage, setCurrentPage] = useState(1);
-  const startIndex = (currentPage - 1) * PER_PAGE;
-const endIndex = currentPage * PER_PAGE;
+  // const startIndex = (currentPage - 1) * PER_PAGE;
+// const endIndex = currentPage * PER_PAGE;
 
-const filteredEvents = data?.events
-  .filter(event => !type || event.type === type) // Filtrer par type si un type est sélectionné
-  .slice(startIndex, endIndex); // Paginer les résultats filtrés
+const filteredEvents = ((!type ? data?.events : data?.events.filter((event) => event.type === type)) || []).filter(
+  (event, index) => {
+    if (
+      (currentPage - 1) * PER_PAGE <= index &&
+      PER_PAGE * currentPage > index
+    ) {
+      return true;
+    }
+    return false;
+  }
+);
 
   const changeType = (evtType) => {
     setCurrentPage(1);
